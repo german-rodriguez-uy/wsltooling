@@ -3,6 +3,9 @@
 set -euo pipefail
 DIR_ME=$(realpath $(dirname $0))
 
+# This script is called by any user. It shall succeed without a username parameter
+. ${DIR_ME}/.installUtils.sh
+setUserName ${1-"$(whoami)"}
 sudo apt update
 sudo apt remove docker docker.io containerd runc
 sudo apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -12,7 +15,9 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt update
 sudo apt install -y --no-install-recommends docker-ce
 
-VERSION_DOCKER_COMPOSE="v2.1.1"
+modifyBashrc "dockerd" "sudo -b sh -c 'nohup dockerd < /dev/null > /var/log/dockerd.log 2>&1'"
+
+VERSION_DOCKER_COMPOSE="v2.7.0"
 if [[ ! -d ~/.docker/cli-plugins ]]; then
   mkdir -p ~/.docker/cli-plugins
 fi

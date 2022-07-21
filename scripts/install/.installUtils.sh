@@ -67,4 +67,6 @@ modifyWslConf () {
   sudo cp ${DIR_INSTALL_UTILS}/../config/system/wsl.conf /etc/wsl.conf
   sudo echo "[user]" >> /etc/wsl.conf
   sudo echo "default=${USERNAME}" >> /etc/wsl.conf
+  sudo apt install -y dos2unix
+  sudo sed -i 's/\r$//g' /etc/wsl.conf
 }
