@@ -14,6 +14,9 @@ bash ${DIR_ME}/../config/system/prepareXServer.sh ${USERNAME}
 echo -e "\n\nInstalling docker & docker-compose apt"
 bash ${DIR_ME}/installDocker.sh
 
+#echo -e "\n\nInstalling k3d & portainer"
+#bash ${DIR_ME}/installKubernetes.sh
+
 #echo -e "\n\nInstalling OpenJDK 11 via apt..."
 #bash ${DIR_ME}/installOpenjdk.sh
 

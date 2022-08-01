@@ -6,6 +6,7 @@ DIR_ME=$(realpath $(dirname $0))
 # This script is called by any user. It shall succeed without a username parameter
 . ${DIR_ME}/.installUtils.sh
 setUserName ${1-"$(whoami)"}
+
 sudo apt update
 sudo apt remove docker docker.io containerd runc
 sudo apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -16,6 +17,8 @@ sudo apt update
 sudo apt install -y --no-install-recommends docker-ce
 
 modifyBashrc "dockerd" "sudo -b sh -c 'nohup dockerd < /dev/null > /var/log/dockerd.log 2>&1'"
+sudo usermod -a $USERNAME -G docker
+
 
 VERSION_DOCKER_COMPOSE="v2.7.0"
 if [[ ! -d ~/.docker/cli-plugins ]]; then

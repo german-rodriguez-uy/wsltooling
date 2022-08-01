@@ -1,3 +1,2 @@
-.\enableWSL.ps1
-.\installWSL2.ps1
+.\WSL2Setup\WSL2_Install.ps1
 .\installUbuntuLTS.ps1 devbox devbox true
